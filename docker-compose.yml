@@ -6,7 +6,7 @@ services:
     volumes:
       - './logs/receiver.log:/app/logs/receiver.log'
       # - ./conf:/app/conf
-      - ./test:/app/conf
+      - ./conf:/app/conf
     depends_on:
       - kafka
     ports:
@@ -17,7 +17,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - './logs/storage.log:/app/logs/storage.log'
-      - ./prod:/app/conf/prod
+      - ./conf:/app/conf
     depends_on:
       - db
       - kafka
@@ -35,7 +35,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - './logs/processing.log:/app/logs/processing.log'
-      - ./test:/app/conf
+      - ./conf:/app/conf
       - ./data/processing:/app/data
     depends_on:
       - storage
@@ -47,7 +47,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - './logs/analyzer.log:/app/logs/analyzer.log'
-      - ./test:/app/conf
+      - ./conf:/app/conf
     depends_on:
       - kafka
     ports:
