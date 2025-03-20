@@ -17,7 +17,7 @@ USER nobody
 
 EXPOSE 8090
 
-# ENTRYPOINT [ "python3" ]
-# CMD [ "app.py" ]
-CMD ["sh", "-c", "python3 /app/db_management.py && python3 /app/app.py"]
+ENTRYPOINT [ "python3" ]
+CMD [ "app.py" ]
+# CMD ["sh", "-c", "python3 /app/db_management.py && python3 /app/app.py"]
 

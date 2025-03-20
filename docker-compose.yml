@@ -5,7 +5,8 @@ services:
       dockerfile: Dockerfile
     volumes:
       - './logs/receiver.log:/app/logs/receiver.log'
-      - ./conf:/app/conf
+      # - ./conf:/app/conf
+      - ./test:/app/conf
     depends_on:
       - kafka
     ports:
@@ -16,17 +17,25 @@ services:
       dockerfile: Dockerfile
     volumes:
       - './logs/storage.log:/app/logs/storage.log'
-      - ./conf:/app/conf
+      - ./prod:/app/conf/prod
     depends_on:
       - db
       - kafka
+    restart:
+      always
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      retries: 3
+      start_period: 30s
+      timeout: 10s
   processing:
     build:
       context: processing
       dockerfile: Dockerfile
     volumes:
       - './logs/processing.log:/app/logs/processing.log'
-      - ./conf:/app/conf
+      - ./test:/app/conf
       - ./data/processing:/app/data
     depends_on:
       - storage
@@ -38,7 +47,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - './logs/analyzer.log:/app/logs/analyzer.log'
-      - ./conf:/app/conf
+      - ./test:/app/conf
     depends_on:
       - kafka
     ports:
