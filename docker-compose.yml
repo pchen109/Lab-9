@@ -36,7 +36,6 @@ services:
     volumes:
       - './logs/processing.log:/app/logs/processing.log'
       - ./conf:/app/conf
-      - ./data/processing:/app/data
     depends_on:
       - storage
     ports:

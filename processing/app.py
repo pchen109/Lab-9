@@ -61,7 +61,7 @@ def populate_stats():
 
     # with open(stats_file_path, "w") as fp:
     #     json.dump(stats, fp, indent=4)
-    with open("/app/data/output.json", "w") as fp:
+    with open("/app/stats.json", "w") as fp:
         json.dump(stats, fp, indent=4)
 
     logger.info("Beep boop! Updating completed. 🤖✅")
